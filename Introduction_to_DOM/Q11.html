@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="hading"></h1>
+    <div class="container">
+    <h4>query selector example</h4>
+    </div>
+
+    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas, nisi!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor fuga soluta quos ipsa neque aliquam vero iusto, quidem veniam eius?</p>
+
+</body>
+</html>
+
+<script>
+    // get element by id
+    let h1=document.getElementById('hading')
+    h1.innerText="Welcome to the DOM World!."
+
+
+    //query selector
+
+    let div=document.querySelector('.container')
+    div.style.backgroundColor="yellow"
+
+
+    //get element by tag name
+    let p=document.getElementsByTagName('p')
+    for(i=0;i<p.length;i++){
+        p[i].style.color="blue"
+    }
+
+
+</script>
