@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="color" style="height: 100px; width: 200px; border: 1px solid black;">
+        
+    </div>
+    <input type="text" id="colorname" placeholder="Enter color name">
+    <button id="changecolor" onclick="changecolor()">change Background</button>
+    
+
+
+    <div style="height: 100px; width: 200px; margin-top: 50px; border: 1px solid black;">
+        <p id="chnaged" style="text-align: center;"> Text </p>
+    </div>
+    <input type="text" id="textchange" placeholder="Enter text">
+    <button id="Uptxt" onclick="changetext()">Upadate Text</button>
+
+</body>
+</html>
+
+
+<script>
+  
+
+
+    function changecolor(){
+        let colordiv=document.getElementById('color')
+          let colorname=document.getElementById('colorname').value
+        if (CSS.supports("color", colorname)){
+                     colordiv.style.backgroundColor=colorname
+        }
+        else{
+            alert("Color is Invalid")
+        }
+    }
+
+    function changetext(){
+             let chnaged=document.getElementById('chnaged')
+             let textchange=document.getElementById('textchange').value
+
+             if(textchange==""){
+                alert("Enter some text")
+             }
+              chnaged.innerText=`updated text: ${textchange}`
+    }
+</script>
