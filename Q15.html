@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #input{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    #Tasktxt{
+        height: 20px;
+        border-radius: 4px;
+        background-color: bisque;
+    }
+
+    #taskAdd{
+        background-color: rgb(148, 186, 255);
+        border-radius: 4px;
+    }
+
+    #list{
+        text-align: center;
+        list-style: none;
+    }
+    #list li{
+        font-size: larger;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        border: 1px solid black;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        height: 30px;
+          
+    }
+    #list li button{
+        border-radius: 10px;
+        
+    }
+
+</style>
+<body>
+    <div id="input">
+        <input id="Tasktxt" type="text" placeholder="Enter name">
+        <button id="taskAdd" onclick="AddTask()">Add Task</button>
+    </div>
+
+    <ul id="list">
+        
+    </ul>
+</body>
+</html>
+
+<script>
+let ul=document.getElementById('list')
+
+    function AddTask(){
+    let task=document.getElementById('Tasktxt').value
+
+    if(task=="")
+    {
+        alert("Enter Task Name")
+        return
+    }
+    
+    let li=document.createElement('li')
+    // let CompleteBtn=document.createElement('button')
+    // let DeleteBtn=document.createElement('button').innerText()
+    li.textContent=task
+
+    let CompleteBtn=document.createElement('button')
+    CompleteBtn.textContent="Complete"
+    CompleteBtn.classList.add('btn','complete')
+    CompleteBtn.onclick=()=>{
+        li.style.backgroundColor="lightgreen"
+    }
+
+    let DeleteBtn=document.createElement('button')
+    DeleteBtn.textContent="Delete"
+    DeleteBtn.classList.add('btn','Delete')
+    DeleteBtn.onclick=()=>{
+        li.style.backgroundColor="brown"
+    }
+
+
+    li.appendChild(CompleteBtn)
+    li.appendChild(DeleteBtn)
+
+    ul.append(li)
+    }
+    
+</script>
