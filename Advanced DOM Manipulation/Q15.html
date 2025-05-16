@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #input{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    #Tasktxt{
+        height: 20px;
+        border-radius: 4px;
+        background-color: bisque;
+    }
+
+    #taskAdd{
+        background-color: rgb(148, 186, 255);
+        border-radius: 4px;
+    }
+
+    #list{
+        text-align: center;
+        list-style: none;
+    }
+    #list li{
+        display: flex;
+        font-size: larger;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        border: 1px solid black;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        height: 30px;
+          
+    }
+    #list li button{
+        border-radius: 10px;
+        
+    }
+
+#counting{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+</style>
+<body>
+    <div id="input">
+        <input id="Tasktxt" type="text" placeholder="Enter name">
+        <button id="taskAdd" onclick="AddTask()">Add Task</button>
+    </div>
+<hr>
+    <div id="filter" style="display: flex;justify-content: center;gap: 100px; margin-top: 20px;">
+        <select   id="tasks">
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option onclick="incomplateTasks()" value="incomplate">Incomplate</option>
+        </select>
+
+        <select  id="sortatoz">
+            <option value="atoz">AtoZ</option>
+            <option value="ztoa">ZtoA</option>
+        </select>
+    </div>
+    <hr>
+
+    <div id="counting">
+        
+    </div>
+<hr>
+<div id="list">
+    </div>
+</body>
+</html>
+
+<script>
+   
+    let alltask=0
+    let complatdtask=0
+    let incomplatetask=0
+
+    let countdiv=document.getElementById('counting')
+        // let alltxt=document.getElementById('alltask')
+        // let completetxt=document.getElementById('complatdtask')
+        // let incomplatetxt=document.getElementById('incomplatetask')
+     countdiv.innerHTML=`
+        <p id="tot">Total Tasks=${alltask}</p>
+        <p id="done">complated Tasks=${complatdtask}</p>
+        <p id ="undone">Incomaplate Tasks=${incomplatetask}</p>
+`
+        
+    function AddTask(){
+        alltask++
+        incomplatetask++
+        document.getElementById('tot').innerText=`Total Tasks=${alltask}`
+        document.getElementById('undone').innerText=`Incomaplate Tasks=${incomplatetask}`
+         let taskname=document.getElementById('Tasktxt').value
+
+        let list=document.getElementById('list')
+        let li=document.createElement('li')
+        li.innerHTML=`
+          <p class="text">${taskname}</p> 
+          <button class=donetask>Complate</button>
+        `
+        let donetask=li.querySelector('.donetask')
+        //  let donetask=document.createElement('button')
+    // donetask.textContent="Complete"
+    // donetask.classList.add('btn','complete')
+    donetask.addEventListener('click',function(){
+        li.style.backgroundColor="lightgreen"
+        complatdtask++
+        incomplatetask--
+        document.getElementById('done').innerText=`complated Tasks=${complatdtask}`
+        document.getElementById('undone').innerText=`Incomaplate Tasks=${incomplatetask}`
+    })
+        list.appendChild(li)
+        // console.log(alltask)
+    }
+
+    function incomplateTasks(){
+         let lists=document.querySelectorAll('#list li')
+        //  list.innerHTML=""
+       
+        lists.forEach(task => {
+         if (task.style.backgroundColor == "lightgreen") {
+            task.style.display = "none"; 
+        } else {
+            task.style.display = "flex"; 
+        }
+    })
+    
+}
+    // incomplateTasks()
+
+    
+</script>
