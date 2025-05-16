@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #grid{
+        display:grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 20px;
+    }
+
+    .product{
+        border: 0.5px black solid;
+        text-align: center;
+    }
+
+    .instock{
+        background-color: lightgreen;
+    }
+
+    .nostock{
+        background-color: red;
+    }
+</style>
+<body>
+    <div id="grid">
+
+    </div>
+</body>
+</html>
+
+<script>
+
+    const products = [
+      { id: 1, name: "Product A", price: 50, inStock: true },
+      { id: 2, name: "Product B", price: 30, inStock: false },
+      { id: 3, name: "Product C", price: 70, inStock: true },
+      { id: 4, name: "Product D", price: 20, inStock: false }
+    ];
+
+
+
+    let grid=document.getElementById('grid')
+
+    products.forEach(product=>{
+        let div=document.createElement('div')
+        div.className="product"
+        if(product.inStock){
+            div.classList.add('instock')
+        }
+        else{
+            div.classList.add('nostock')
+        }
+
+
+        let stock=""
+             if (product.inStock) {
+              stock= 'In Stock';
+                   } 
+            else {
+               stock= 'Out of Stock';
+                 }
+        div.innerHTML=`
+          <b>${product.name}</b>
+          <p>Price:${product.price}</p>
+          <p>${stock}</p>
+        `
+        grid.appendChild(div)
+    })
+</script>
+
