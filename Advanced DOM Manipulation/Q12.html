@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+  <ul id="list">
+    <li id="item1">Item 1</li>
+    <li id="item2">Item 2</li>
+    <li id="item3">Item 3</li>
+  </ul>
+</div>
+
+</body>
+</html>
+
+
+<script>
+    let ul=document.getElementById('list')
+    let li2=document.getElementById('item2')
+
+    li2.addEventListener('click',()=>{
+        alert(ul.textContent)
+      
+        console.log(`i am previous element sibling--> ${li2.previousElementSibling.innerText}`)
+        console.log(`i am next element sibling--> ${li2.nextElementSibling.innerText}`)
+    })
+</script>
