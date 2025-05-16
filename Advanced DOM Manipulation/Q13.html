@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #outer{
+        width: 100%;
+        border: 1px solid cyan;
+        background-color: orange;
+    }
+
+    #middle{
+        width: 100%;
+        border: 1px solid cyan;
+        background-color: white;
+    }
+
+    #inner{
+        width: 100%;
+        border: 1px solid cyan;
+        background-color: green;
+    }
+    
+</style>
+<body>
+    <div id="outer">
+        <p>I am outer div</p>
+        <div id="middle">
+            <p>I am middle div</p>
+            <div id="inner">
+             <p>I am innerdiv div</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let outerdiv=document.getElementById('outer')
+    let middiv=document.getElementById('middle')
+    let indiv=document.getElementById('inner')
+
+    outerdiv.addEventListener('click',()=>{
+        alert("outer div is clicked")
+    })
+
+   middiv.addEventListener('click',(event)=>{
+        alert("middle div is clicked")
+        event.stopPropagation()
+    })
+
+    indiv.addEventListener('click',(event)=>{
+        alert("inner div is clicked")
+        event.stopPropagation()
+    })
+    
+</script>
