@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: blanchedalmond;
+        color: white;
+    }
+#list{
+     display: grid;
+        grid-template-columns: repeat(3,1fr);
+        text-align: center;
+        gap: 30px;
+        background-color: rgb(0, 0, 0);
+}
+
+   
+
+    .productlist img{
+        width: 200px;
+        height: 150px;
+    }
+
+    .above{
+        border: 3px solid yellow;
+    }
+
+    .below{
+        border: 3px solid rgb(0, 255, 76);
+    }
+</style>
+<body>
+    <div id="list">
+        
+    </div>
+</body>
+</html>
+
+<script>
+async function FetchApi(){
+    let list=document.getElementById('list')
+    let data=await fetch(`https://fakestoreapi.com/products`)
+   let parsed=await data.json()
+   
+//    console.log(parsed[0])
+
+   parsed.forEach(product => {
+    let div=document.createElement('div')
+    div.className="productlist"
+
+    if(product.price>50)
+   {
+    div.classList.add('above')
+   }
+   else{
+    div.classList.add('below')
+   }
+
+   div.innerHTML=`
+     <div>
+             <img src="${product.image}" alt="">
+        <h3>${product.title}</h3>
+        <b>$${product.price}</b>
+        </div>
+        `
+  list.appendChild(div)
+    });
+
+}
+FetchApi()
+</script>
