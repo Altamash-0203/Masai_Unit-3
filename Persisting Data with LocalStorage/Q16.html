@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="item" placeholder="enter Item ">
+    <button onclick="Add()">Add Item</button>
+
+    <div>
+        <ul id="list">
+
+        </ul>
+    </div>
+</body>
+</html>
+
+<script>
+
+ let items=JSON.parse(localStorage.getItem("list")||"[]");
+
+function Add(){
+    let text=document.getElementById("item").value
+    if(text==""){
+        alert("Invalid Input")
+        return
+    }
+    items.push(text)
+    localStorage.setItem("list",JSON.stringify(items))
+    text.value=""
+show()
+}
+
+function show(){
+
+ let list=document.getElementById('list')
+list.innerHTML=""
+ items.forEach(element => {
+    let li=document.createElement('li')
+    li.innerText= element
+   
+ list.append(li)
+ });
+}
+show()
+</script>
