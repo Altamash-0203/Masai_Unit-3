@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select  id="colors" onchange="changeBG()">
+        <option value="white">Light</option>
+        <option value="gray">Dark</option>
+        <option value="blue">Blue</option>
+    </select>
+</body>
+</html>
+
+<script>
+    function changeBG(){
+    let color=document.getElementById('colors').value
+    //  console.log(color)
+
+    sessionStorage.setItem("color",color)
+
+     let colorName=sessionStorage.getItem("color")
+
+     document.body.style.backgroundColor=`${colorName}`
+    }
+</script>
