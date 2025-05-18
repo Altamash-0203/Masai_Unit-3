@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/c6f780237c.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    #addtask{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        gap: 30px;
+        background-color: royalblue;
+    }
+
+    #tasktxt,#taskname{
+        width: 300px;
+        text-align: center;
+        height: 30px;
+        border-radius: 15px;
+        border: none;
+        background-color: antiquewhite;
+    }
+
+    #addbutton{
+        
+        height: 30px;
+        width: 40px;
+        border-radius:20px;
+        box-shadow: lightcyan;
+        border: none;
+        background-color: antiquewhite;
+        cursor: pointer;
+    }
+
+    #find{
+        gap: 30px;
+    }
+
+   #findtxt{
+    border-radius: 10px;
+    border: 2px solid gray;
+    height: 20px;
+    text-align: center;
+   }
+      
+   #findbutton{
+    height: 25px;
+    width: 30px;
+    border-radius: 5px;
+   }
+
+</style>
+<body>
+    <div id="addtask">
+        <input type="text" name="" id="taskname" placeholder="Enter Task Name">
+        <input type="text" name="" id="tasktxt" placeholder="Enter Task">
+        <button id="addbutton" onclick="AddTask()"><i class="fa-regular fa-plus fa-2xl" style="color: #000000;"></i></button>
+    </div> <hr>
+
+    <div id="display">
+       <h3 style="text-align: center; font-family: cursive; text-decoration: underline;"><i class="fa-solid fa-list"></i> Taks-List</h3>
+       <div style="margin-top: 20px;
+       justify-content: center;
+       display: flex;gap: 20px;">
+         <input type="text" name="" id="findtxt" placeholder="Find Task">
+        <button id="findbutton" onclick="FindTask()"><i class="fa-solid fa-magnifying-glass"></i></button>
+       </div>
+
+
+       <div id="tasklist">
+            
+       </div>
+    </div>
+
+
+    
+        
+    
+</body>
+</html>
+
+
+<script>
+   Showtask()
+
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+function AddTask(){
+     let taskname=document.getElementById('taskname').value
+    let tasktxt=document.getElementById('tasktxt').value
+
+    if(taskname=="" && tasktxt==''){
+        alert("Invalid Input 🤦‍♂️")
+        return
+    }
+
+    let addtaks={
+        name:taskname,
+        task:tasktxt,
+        status:false
+    }
+
+    tasks.push(addtaks)
+
+    localStorage.setItem("tasks",JSON.stringify(tasks))
+    document.getElementById('taskname').value=''
+    document.getElementById('tasktxt').value=''
+    alert("Task Is Added....👍")
+    Showtask()
+    
+}
+
+function Showtask(){
+
+    let list=document.getElementById('tasklist')
+list.innerHTML=''
+ 
+
+    let data=localStorage.getItem('tasks')
+    data=JSON.parse(data)
+
+    // console.log(data)
+
+    data.forEach(ele => {
+           let div=document.createElement('div')
+           div.className="taskcard"
+        div.innerHTML=`
+              
+                <h5>${ele.name}</h5>
+                <b>${ele.task}</b>
+              <button class="complateBtn" onclick="taskcompalted('${ele.name}', this)">Complete</button>
+            <button class="removetask" onclick="removeTask('${ele.name}')">Remove</button>
+                <hr>
+        `
+        list.append(div)
+    });
+
+    
+    
+}
+
+function taskcompalted(taskname,button){
+    let data=JSON.parse(localStorage.getItem('tasks'))
+   
+     let task=data.find(task=>task.name==taskname)
+     if(task){
+        task.status=true
+        localStorage.setItem('tasks',JSON.stringify(data))
+     }
+
+       let taskCard=button.closest('.taskcard');
+       if(task.status)
+       {
+        taskCard.style.backgroundColor = "lightgreen"
+       }
+
+}
+
+function removeTask(taskname) {
+    let data = JSON.parse(localStorage.getItem('tasks'));
+    // console.log(data)
+    data=data.filter(task=>task.name!==taskname)
+    localStorage.setItem('tasks',JSON.stringify(data))
+    Showtask();
+}
+</script>
