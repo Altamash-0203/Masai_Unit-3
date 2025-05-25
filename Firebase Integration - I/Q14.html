@@ -1,0 +1,25 @@
+Q: 14
+Title:
+L1 - Debugging: Fix the Broken Delete Function
+
+Problem Statement:
+You are provided with a pre-written function that is intended to delete a user from the Firebase Realtime Database. However, the function does not work as expected. Your task is to debug and fix the function.
+
+Original Code:
+const deleteUser = (key) => {
+  fetch(`https://your-project-id.firebaseio.com/users/key.json`, {
+    method: 'DELETE',
+  })
+  .then(response => response.json())
+  .then(() => {
+    console.log("User deleted successfully");
+  })
+  .catch(error => console.error("Error deleting user:", error));
+};
+
+Your Tasks:
+Identify and fix the bug(s) in the deleteUser function.
+Ensure the function dynamically uses the correct key parameter to delete the user.
+After deletion, remove the user entry from the displayed user table.
+Submission Guidelines:
+Submit your Masai Git directory link containing the fixed code and any additional files.
