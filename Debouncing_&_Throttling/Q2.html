@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #input {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        
+
+    }
+
+    #display {
+        width: 100%;
+        height: auto;
+        background-color: rgb(245, 245, 245);
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      line-height: 15px;
+    }
+
+    .suggestion {
+        height: fit-content;
+        width: 300px;
+        height: 20px;
+        text-align: center;
+    }
+
+    .suggestion p{
+        border: 1px solid black;
+        border-bottom:1px;
+        border-top: none;
+        margin-top: 3px;
+    }
+    .suggestion p:hover{
+        background-color: rgb(153, 153, 153);
+    }
+</style>
+
+<body>
+    <div id="input">
+        <h1>Find Movie</h1>
+        <input type="text" name="" id="MovieName" placeholder="Enter Movie Name">
+    </div>
+    <div id="display">
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    let name = document.getElementById('MovieName')
+    let display = document.getElementById('display')
+
+    let timer;
+
+    name.addEventListener('input', () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            let query = name.value
+
+            if (query) {
+                fetch(`https://www.omdbapi.com/?apikey=e2b2db74&s=${query}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.Search) {
+                            display.innerHTML = data.Search.map(movie => `
+                       <div class="suggestion">
+                           <p>${movie.Title}</p> <br> 
+                        </div>
+                       `).join('')
+                        }
+                        else {
+                            display.innerHTML = '<div>no movie found</div>'
+                        }
+                    })
+            }
+        }, 500)
+    })
+</script>
