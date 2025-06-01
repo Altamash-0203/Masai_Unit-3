@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+
+<body>
+    
+     <div id="user-detail">
+          <h3 id="heading">SIGN-IN</h3>
+        <input type="text" id="signin-email" placeholder=" Enter your email">
+        <input type="password" id="signin-pass" placeholder=" Enter your password">
+        <button id="signin-button">Login</button>
+          <p id="already">I don't have  account? <a href="index.html">Sign-up</a></p>
+         
+          <h4 id="signin-msg"></h4>
+      
+        </div>
+</body>
+</html>
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+  import { 
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+
+   } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuLjIuXZX65k1BpQRM3b2Cia3zOnyf1mI",
+    authDomain: "first-auth-d07c9.firebaseapp.com",
+    projectId: "first-auth-d07c9",
+    storageBucket: "first-auth-d07c9.firebasestorage.app",
+    messagingSenderId: "539060025133",
+    appId: "1:539060025133:web:ecfdea1ca93cbc36cc85a4",
+    measurementId: "G-QQXJS9W7R3"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth=getAuth(app)
+
+
+document.getElementById('signin-button').addEventListener("click",()=>{
+       let email=document.getElementById('signin-email').value
+       let pass=document.getElementById('signin-pass').value
+
+       signInWithEmailAndPassword(auth,email,pass)
+       .then((userCredentials)=>{
+            window.location.href='dashboard.html'
+       })
+       .catch((error)=>{
+        document.getElementById('signin-msg').innerText=error.message
+       })
+})
+</script>
