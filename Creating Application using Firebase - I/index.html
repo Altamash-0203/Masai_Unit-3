@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #list{
+        display:grid;
+        grid-template-columns: repeat(8,1fr);
+        gap: 5px;
+        padding: 20px;
+        margin-left: 100px;
+
+    }
+
+    .move{
+        width: 90px;
+        background-color: cornflowerblue;
+        font-family: monospace;
+        height: 40px;
+        border-radius: 7px;
+    }
+</style>
+<body>
+    <div id="list">
+
+    </div>
+<div style="margin-left: 50%;">
+    <button class="move" onclick="change(-1)">prev</button>
+    <button  class="move" onclick="change(1)">next</button>
+    </div>
+</body>
+</html>
+
+<script>
+    let display=document.getElementById('list')
+    let pagenum=1
+    function fetchpage(){
+       fetch(`https://rickandmortyapi.com/api/character?page=${pagenum}`)
+       .then(res=>res.json())
+       .then(person=>{
+        display.innerHTML=person.results.map(x=> 
+            `<div>
+                <img src="${x.image}" width="100px"/>
+                <h5>${x.name}</h5>
+                <p>${x.species}</p>
+                <a href="detail.html?id=${x.id}">Detail</a>
+                 <hr>
+                </div>
+               
+            `
+        );
+       })
+    }
+    function change(inc){
+        pagenum+=inc
+        if (pagenum<1)
+        pagenum=1
+        fetchpage()
+    }
+    fetchpage()
+</script>
