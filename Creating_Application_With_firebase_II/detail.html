@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #detail{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            background-color: blanchedalmond;
+            border: 2px solid brown;
+            font-size: large;
+            font-weight: bold;
+            text-transform: capitalize;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="detail">
+    </div>
+</body>
+</html>
+
+<script>
+    let show=document.getElementById('detail')
+    let params=new URLSearchParams(window.location.search)
+    let id=params.get('id')||1
+    // console.log(id)
+
+      fetch(`https://akabab.github.io/starwars-api/api/id/${id}.json`)
+     .then(res=>res.json())
+     .then(char=>{
+        show.innerHTML=
+        `
+            <img src="${char.image}" width="200px"/>
+            <h1>${char.name}</h1>
+            <p>Gender  :   ${char.gender}</p>
+            <p>Species : ${char.species}</p>
+            <p>home world : ${char.homeworld}</p>
+            <p>Height : ${char.height}</p>
+            <p>Mass : ${char.mass}</p>
+            <p>Eye : ${char.eyeColor}</p>
+            <p>hair : ${char.hairColor}</p>
+            <p>Skin : ${char.skinColor}</p>
+        
+        `
+     })
+</script>
