@@ -56,6 +56,8 @@
 <script>
     let Students=[]
     let srno=1
+
+    //---------------------------------------data add function --------------------------------------------
   function addData(){
     let stu_name=document.getElementById("stu-name").value
     let stu_batch=document.getElementById("batch-name").value
@@ -83,16 +85,23 @@ document.getElementById("stu-marks").value=""
 
 
     displayStu(Students)
-    srno++
+    
   }
+//--------------------------------------------end-----------------------------------------------------------------
 
+
+
+
+  //---------------------------------------display function------------------------------------------------------------
   function displayStu(Students){
     let tbody=document.getElementById('show')
     tbody.innerHTML=""
     Students.forEach(stu=>{
         let trow=document.createElement('tr')
+    
         trow.innerHTML+= 
        
+         
        `
     
             <td>${srno}</td>
@@ -110,10 +119,15 @@ document.getElementById("stu-marks").value=""
             trow.children[4].className="red-bg"
         }
         tbody.appendChild(trow)
+        
     });
   }
- 
+//-------------------------------------------------end----------------------------------------------
 
+
+
+ 
+//-------------------------------------------search functionality-----------------------------------
  function searchStu(){
     let searchName=document.getElementById("search-stu").value
 
@@ -143,15 +157,23 @@ document.getElementById("stu-marks").value=""
             trow.children[4].className="red-bg"
         }
         tbody.appendChild(trow)
+        
     });
  }
+ //------------------------------------------------------------end----------------------------------------------------------
 
+
+
+
+
+
+
+ //-----------------------------------------------------ascending order sort functionality---------------------------------
 
 
  function sort_asc(){
      let tbody=document.getElementById('show')
     tbody.innerHTML=""
-        
     Students=Students.sort((a,b)=>a.marks-b.marks)
     
     Students.forEach(stu=>{
@@ -178,15 +200,17 @@ document.getElementById("stu-marks").value=""
     });
  }
 
+//---------------------------------------------end-------------------------------------------------------------
 
 
 
 
+
+//-------------------------------decending order sort functionality-------------------------------
 
  function sort_dec(){
      let tbody=document.getElementById('show')
     tbody.innerHTML=""
-        
     Students=Students.sort((a,b)=>b.marks-a.marks)
     
     Students.forEach(stu=>{
@@ -210,7 +234,8 @@ document.getElementById("stu-marks").value=""
             trow.children[4].className="red-bg"
         }
         tbody.appendChild(trow)
+        srno++
     });
  }
-
+//-----------------------------------------------end--------------------------------------------
 </script>
