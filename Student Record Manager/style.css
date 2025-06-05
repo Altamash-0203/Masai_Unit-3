@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: gainsboro;
+}
+body{
+   
+}
+
+#form{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    gap: 30px;
+    border: 2px solid lightcyan;
+    padding: 20px;
+    background-color: rgb(196, 217, 255);
+}
+
+#form input,button{
+    width: 200px;
+    height: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#search-stu{
+    width: 200px;
+    height: 20px;
+    text-align: center;
+
+}
+
+#find-stu ,button{
+    width: 70px;
+    height: 22px;
+}

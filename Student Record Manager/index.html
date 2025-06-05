@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .green-bg{
+        background-color: lightgreen;
+    }
+    .red-bg{
+        background-color:rgb(201, 91, 91);
+    }
+</style>
+
+<body>
+    <div id="form">
+        <input type="text" id="stu-name" placeholder="Enter Your Name">
+        <input type="text" id="batch-name" placeholder="Enter Batch Name">
+        <input type="number" id="stu-age" placeholder="Enter Your Age">
+        <input type="number" id="stu-marks" placeholder="Enter Your Marks">
+        <button id="submit-btn" onclick="addData()">Submit</button>
+    </div>
+
+    
+
+    <div style="margin-top: 40px; text-align: center;">
+        <input type="text" placeholder="search student by name" id="search-stu">
+        <button id="find-stu" onclick="searchStu()">Find</button>
+
+        <button onclick="sort_asc()">Sort by Asc</button>
+        <button onclick="sort_dec()">sort by dec</button>
+    </div>
+    <table border="" cellspacing="15" id="data">
+        <thead>
+            <tr>
+                <th>SR.NO</th>
+                <th>NAME</th>
+                <th>BATCH</th>
+                <th>AGE</th>
+                <th>MARKS</th>
+            </tr>
+        </thead>
+        <tbody id="show">
+
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+
+<script>
+    let Students=[]
+    let srno=1
+  function addData(){
+    let stu_name=document.getElementById("stu-name").value
+    let stu_batch=document.getElementById("batch-name").value
+    let stu_age=document.getElementById("stu-age").value
+    let stu_marks=document.getElementById("stu-marks").value
+
+    if(!stu_name||!stu_batch||!stu_age||!stu_marks){  
+        return alert("Fill all boxes")
+    }
+        
+    let stu_data=
+    {
+      "name":stu_name,
+      "batch":stu_batch,
+      "age":stu_age,
+      "marks":stu_marks
+    }
+    
+    Students.push(stu_data)
+  
+document.getElementById("stu-name").value=""
+document.getElementById("batch-name").value=""
+document.getElementById("stu-age").value=""
+document.getElementById("stu-marks").value=""
+
+
+    displayStu(Students)
+    srno++
+  }
+
+  function displayStu(Students){
+    let tbody=document.getElementById('show')
+    tbody.innerHTML=""
+    Students.forEach(stu=>{
+        let trow=document.createElement('tr')
+        trow.innerHTML+= 
+       
+       `
+    
+            <td>${srno}</td>
+            <td>${stu.name}</td>
+            <td>${stu.batch}</td>
+            <td>${stu.age}</td>
+            <td>${stu.marks}</td>
+        
+
+        `
+        if(stu.marks>80){
+            trow.children[4].className="green-bg"
+        }
+         else{
+            trow.children[4].className="red-bg"
+        }
+        tbody.appendChild(trow)
+    });
+  }
+ 
+
+ function searchStu(){
+    let searchName=document.getElementById("search-stu").value
+
+    let tbody=document.getElementById('show')
+    tbody.innerHTML=""
+    let filtered=Students.filter((stu)=>stu.name.includes(searchName))
+    // console.log(filtered)
+
+    filtered.forEach(stu=>{
+        let trow=document.createElement('tr')
+        trow.innerHTML+= 
+       
+       `
+    
+            <td>${srno}</td>
+            <td>${stu.name}</td>
+            <td>${stu.batch}</td>
+            <td>${stu.age}</td>
+            <td>${stu.marks}</td>
+        
+
+        `
+        if(stu.marks>80){
+            trow.children[4].className="green-bg"
+        }
+         else{
+            trow.children[4].className="red-bg"
+        }
+        tbody.appendChild(trow)
+    });
+ }
+
+
+
+ function sort_asc(){
+     let tbody=document.getElementById('show')
+    tbody.innerHTML=""
+        
+    Students=Students.sort((a,b)=>a.marks-b.marks)
+    
+    Students.forEach(stu=>{
+        let trow=document.createElement('tr')
+        trow.innerHTML+= 
+       
+       `
+    
+            <td>${srno}</td>
+            <td>${stu.name}</td>
+            <td>${stu.batch}</td>
+            <td>${stu.age}</td>
+            <td>${stu.marks}</td>
+        
+
+        `
+        if(stu.marks>80){
+            trow.children[4].className="green-bg"
+        }
+         else{
+            trow.children[4].className="red-bg"
+        }
+        tbody.appendChild(trow)
+    });
+ }
+
+
+
+
+
+
+ function sort_dec(){
+     let tbody=document.getElementById('show')
+    tbody.innerHTML=""
+        
+    Students=Students.sort((a,b)=>b.marks-a.marks)
+    
+    Students.forEach(stu=>{
+        let trow=document.createElement('tr')
+        trow.innerHTML+= 
+       
+       `
+    
+            <td>${srno}</td>
+            <td>${stu.name}</td>
+            <td>${stu.batch}</td>
+            <td>${stu.age}</td>
+            <td>${stu.marks}</td>
+        
+
+        `
+        if(stu.marks>80){
+            trow.children[4].className="green-bg"
+        }
+        else{
+            trow.children[4].className="red-bg"
+        }
+        tbody.appendChild(trow)
+    });
+ }
+
+</script>
