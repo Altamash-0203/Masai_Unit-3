@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search-Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3 id="logo">Students-Data</h3>
+
+
+    <div id="counters">
+      <p>Debounce count:-<span id="debounce-count">0</span></p> <hr>
+      <p>keystrokes count:- <span id="keystrokes-count">0</span></p>
+    </div>
+
+
+
+  <div id="input-box">
+    <input type="text" id="name" placeholder="Find Student By Name 🔍">
+  </div>
+
+
+  <div id="list">
+
+  </div>
+
+  <h4 id="error"></h4>
+
+
+ <button id="top-button">
+  🔝 top
+</button>
+</body>
+</html>
+
+
+
+<script>
+ const names = [
+  "Aarav", "Vivaan", "Aditya", "Vihaan", "Krishna", "Arjun", "Sai", "Aryan", "Reyansh", "Ayaan",
+  "Laksh", "Dhruv", "Kabir", "Rudra", "Atharv", "Shaurya", "Ansh", "Om", "Ishaan", "Rayan",
+  "Harsh", "Kunal", "Nikhil", "Samar", "Yash", "Kartik", "Dev", "Rishi", "Rohit", "Varun",
+  "Manav", "Nirav", "Jatin", "Tushar", "Tejas", "Siddharth", "Aniket", "Mihir", "Raj", "Jay",
+  "Tarun", "Amit", "Neeraj", "Parth", "Arnav", "Vishal", "Ajay", "Rahul", "Karan", "Abhishek",
+  "Vikram", "Harshit", "Mayank", "Saurabh", "Pranav", "Chirag", "Alok", "Deepak", "Nitin", "Anil",
+  "Hemant", "Sumeet", "Sachin", "Uday", "Vinay", "Gaurav", "Yuvraj", "Ravindra", "Bhavesh", "Prem",
+  "Surya", "Amar", "Raghav", "Sanjay", "Rajesh", "Dinesh", "Mahesh", "Rakesh", "Pankaj", "Sunil",
+  "Shravan", "Keshav", "Rajiv", "Narayan", "Harendra", "Balram", "Madan", "Lalit", "Subhash", "Naresh",
+  "Meena", "Anjali", "Priya", "Pooja", "Kavya", "Swati", "Neha", "Riya", "Shreya", "Sakshi",
+  "Nikita", "Ananya", "Ishita", "Tanya", "Khushi", "Sneha", "Radhika", "Divya", "Aishwarya", "Sanya",
+  "Simran", "Aarti", "Bhavya", "Megha", "Nandini", "Tanu", "Shruti", "Avni", "Jhanvi", "Pallavi",
+  "Kritika", "Aarohi", "Muskan", "Trisha", "Ayesha", "Shanaya", "Rekha", "Rashmi", "Payal", "Vandana",
+  "Smita", "Deepa", "Naina", "Radha", "Bhawna", "Kiran", "Sonia", "Lata", "Geeta", "Madhuri",
+  "Sushma", "Preeti", "Usha", "Seema", "Archana", "Sudha", "Sunita", "Anita", "Vimla", "Savita",
+  "Kusum", "Asha", "Manju", "Jyoti", "Kamla", "Kalpana", "Renu", "Reema", "Indu", "Sarita",
+  "Hemlata", "Padmini", "Rajni", "Pushpa", "Chandni", "Madhu", "Sarla", "Veena", "Rupa", "Shobha",
+  "Kanchan", "Manisha", "Harleen", "Gitanjali", "Namrata", "Surbhi", "Poonam", "Kajal", "Lavanya", "Parul",
+  "Tanvi", "Ira", "Charu", "Vidya", "Asmita", "Gargi", "Yamini", "Neelam", "Tripti", "Vaishnavi",
+  "Sharvani", "Barkha", "Ritika", "Sonali", "Ankita", "Alka", "Varsha", "Shalini", "Gunjan", "Nivedita",
+  "Amrita", "Urvashi", "Ekta", "Sheetal", "Mitali", "Aparna", "Bharti", "Komal", "Apoorva", "Deepti",
+  "Sadhna", "Chitra", "Rajshree", "Suchitra", "Suhani", "Devika", "Sanjana", "Krishnaa", "Arpita", "Prerna",
+  "Aaliya", "Vasudha", "Mahima", "Meera", "Lakshmi", "Padma", "Malti", "Indira", "Sharada", "Gauri",
+  "Shraddha", "Jaya", "Malvika", "Shweta", "Rupali", "Pragya", "Shanvika", "Ragini", "Mohini", "Sharanya",
+  "Ishwari", "Renuka", "Yashika", "Nitya", "Kanika", "Pavitra", "Anvi", "Shivani", "Shambhavi", "Tanisha",
+  "Sridevi", "Agnika", "Bhanu", "Chaitali", "Kalindi", "Kumud", "Mridula", "Nalini", "Padmavati", "Rachna",
+  "Saraswati", "Ujjwala", "Vatsala", "Ahalya", "Charita", "Diksha", "Eshita", "Gomati", "Hemani", "Ila",
+  "Jamuna", "Kanti", "Lalita", "Manorama", "Narmada", "Ojasvi", "Pranjali", "Ragini", "Sharvani", "Triloki",
+  "Uttara", "Vidula", "Yamuna", "Zeenat", "Chhavi", "Tanvika", "Reeva", "Rashi", "Bhoomi", "Akhila",
+  "Arohi", "Avantika", "Baani", "Chavi", "Diya", "Ela", "Falak", "Gul", "Hiral", "Inaaya",
+  "Jivika", "Kiya", "Liyana", "Mira", "Nyra", "Oorja", "Pari", "Qirat", "Riva", "Sitara",
+  "Tisha", "Urja", "Vanya", "Wamika", "Xara", "Yana", "Zaara", "Arhaan", "Bhuvan", "Chandan",
+  "Darpan", "Eklavya", "Farhan", "Gauransh", "Hriday", "Ibrahim", "Jaskaran", "Kiaan", "Lakshay", "Moksh",
+  "Naksh", "Onkar", "Pradyumna", "Qasim", "Ranveer", "Samarjeet", "Tarak", "Utkarsh", "Vedant", "Waris",
+  "Xavier", "Yatindra", "Zoravar", "Amey", "Bhargav", "Chirantan", "Devansh", "Eshan", "Fanish", "Govind"
+];
+
+let timer;
+let letters=0
+let debounced=0
+
+// let find=document.getElementById('name').value
+
+document.getElementById('name').addEventListener('input',()=>{
+  
+  letters++
+  document.getElementById('keystrokes-count').innerText=`${letters}`
+  clearTimeout(timer)
+   
+  timer= setTimeout(() => {
+    let input_name=document.getElementById('name').value
+    input_name.toLocaleLowerCase()
+       let filter_name=names.filter((name)=>name.toLocaleLowerCase().includes(input_name))
+       
+       if(filter_name.length==0){
+         document.getElementById('list').innerHTML=""
+        document.getElementById('error').innerText="No Name Found"
+       }
+       else{
+        document.getElementById('error').innerText=""
+       displayNames(filter_name)
+         debounced++
+         document.getElementById('debounce-count').innerText=`${debounced}`
+       }
+  }, 1000);
+})
+
+
+function displayNames(data){
+
+  let list=document.getElementById('list')
+  list.innerHTML=""
+
+  data.forEach(ele => {
+    let div=document.createElement('div')
+        div.className="card"
+
+        div.innerHTML=`${ele}
+        
+        `
+        list.appendChild(div)
+  });
+}
+
+
+
+
+
+
+//throtling
+let t;
+
+window.onscroll=()=>{
+
+  clearTimeout(t)
+
+  t= setTimeout(() => {
+    // console.log("working")
+      if (window.scrollY > 200)
+     {
+      document.getElementById('top-button').style.display="block"
+      // console.log("working")
+     }
+     else
+     {
+      document.getElementById('top-button').style.display="none"
+     }
+  }, 500);
+}
+document.getElementById('top-button').onclick=()=>scrollTo({top:0})
+
+
+</script>

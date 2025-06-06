@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0%;
+    padding: 0;
+    background-color: rgb(218, 176, 176);
+    
+}
+
+
+#logo{
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: x-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px 5px ;
+}
+
+#input-box{
+    margin-top: 40px;
+    text-align: center;
+}
+
+
+#input-box input{
+   width: 300px;
+   height: 30px;
+   border: none;
+   background-color: transparent;
+   border-bottom: 1px solid rgb(0, 0, 0);
+   font-family: cursive;
+   font-size: 20px;
+   text-align: center;
+}
+
+#counters{
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-around;
+    text-transform: uppercase;
+    border: 2px solid red;
+    font-size: 14px;
+    font-family: cursive;
+
+}
+
+#debounce-count,#keystrokes-count{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+
+#list{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    gap: 10px;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.card{
+    border: 2px solid rgb(0, 0, 0);
+    box-shadow: 3px 1px 3px 1px;
+    background-color: blanchedalmond;
+}
+
+.card:hover{
+    background-color: lightgreen;
+}
+
+#error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    color: brown;
+}
+
+#top-button{
+    width: 150px;
+    height: 40px;
+    background-color: cyan;
+    color: black;
+    font-weight: bolder;
+    display: none;
+    bottom: 10px;
+    right: 10px;
+    position: fixed;
+}
