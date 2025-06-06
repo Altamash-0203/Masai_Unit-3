@@ -38,43 +38,43 @@
 
 
 <script>
- const names = [
+
+const names=[
   "Aarav", "Vivaan", "Aditya", "Vihaan", "Krishna", "Arjun", "Sai", "Aryan", "Reyansh", "Ayaan",
   "Laksh", "Dhruv", "Kabir", "Rudra", "Atharv", "Shaurya", "Ansh", "Om", "Ishaan", "Rayan",
   "Harsh", "Kunal", "Nikhil", "Samar", "Yash", "Kartik", "Dev", "Rishi", "Rohit", "Varun",
-  "Manav", "Nirav", "Jatin", "Tushar", "Tejas", "Siddharth", "Aniket", "Mihir", "Raj", "Jay",
-  "Tarun", "Amit", "Neeraj", "Parth", "Arnav", "Vishal", "Ajay", "Rahul", "Karan", "Abhishek",
-  "Vikram", "Harshit", "Mayank", "Saurabh", "Pranav", "Chirag", "Alok", "Deepak", "Nitin", "Anil",
-  "Hemant", "Sumeet", "Sachin", "Uday", "Vinay", "Gaurav", "Yuvraj", "Ravindra", "Bhavesh", "Prem",
-  "Surya", "Amar", "Raghav", "Sanjay", "Rajesh", "Dinesh", "Mahesh", "Rakesh", "Pankaj", "Sunil",
-  "Shravan", "Keshav", "Rajiv", "Narayan", "Harendra", "Balram", "Madan", "Lalit", "Subhash", "Naresh",
-  "Meena", "Anjali", "Priya", "Pooja", "Kavya", "Swati", "Neha", "Riya", "Shreya", "Sakshi",
-  "Nikita", "Ananya", "Ishita", "Tanya", "Khushi", "Sneha", "Radhika", "Divya", "Aishwarya", "Sanya",
-  "Simran", "Aarti", "Bhavya", "Megha", "Nandini", "Tanu", "Shruti", "Avni", "Jhanvi", "Pallavi",
-  "Kritika", "Aarohi", "Muskan", "Trisha", "Ayesha", "Shanaya", "Rekha", "Rashmi", "Payal", "Vandana",
-  "Smita", "Deepa", "Naina", "Radha", "Bhawna", "Kiran", "Sonia", "Lata", "Geeta", "Madhuri",
-  "Sushma", "Preeti", "Usha", "Seema", "Archana", "Sudha", "Sunita", "Anita", "Vimla", "Savita",
-  "Kusum", "Asha", "Manju", "Jyoti", "Kamla", "Kalpana", "Renu", "Reema", "Indu", "Sarita",
-  "Hemlata", "Padmini", "Rajni", "Pushpa", "Chandni", "Madhu", "Sarla", "Veena", "Rupa", "Shobha",
-  "Kanchan", "Manisha", "Harleen", "Gitanjali", "Namrata", "Surbhi", "Poonam", "Kajal", "Lavanya", "Parul",
-  "Tanvi", "Ira", "Charu", "Vidya", "Asmita", "Gargi", "Yamini", "Neelam", "Tripti", "Vaishnavi",
-  "Sharvani", "Barkha", "Ritika", "Sonali", "Ankita", "Alka", "Varsha", "Shalini", "Gunjan", "Nivedita",
-  "Amrita", "Urvashi", "Ekta", "Sheetal", "Mitali", "Aparna", "Bharti", "Komal", "Apoorva", "Deepti",
-  "Sadhna", "Chitra", "Rajshree", "Suchitra", "Suhani", "Devika", "Sanjana", "Krishnaa", "Arpita", "Prerna",
-  "Aaliya", "Vasudha", "Mahima", "Meera", "Lakshmi", "Padma", "Malti", "Indira", "Sharada", "Gauri",
-  "Shraddha", "Jaya", "Malvika", "Shweta", "Rupali", "Pragya", "Shanvika", "Ragini", "Mohini", "Sharanya",
-  "Ishwari", "Renuka", "Yashika", "Nitya", "Kanika", "Pavitra", "Anvi", "Shivani", "Shambhavi", "Tanisha",
-  "Sridevi", "Agnika", "Bhanu", "Chaitali", "Kalindi", "Kumud", "Mridula", "Nalini", "Padmavati", "Rachna",
-  "Saraswati", "Ujjwala", "Vatsala", "Ahalya", "Charita", "Diksha", "Eshita", "Gomati", "Hemani", "Ila",
-  "Jamuna", "Kanti", "Lalita", "Manorama", "Narmada", "Ojasvi", "Pranjali", "Ragini", "Sharvani", "Triloki",
-  "Uttara", "Vidula", "Yamuna", "Zeenat", "Chhavi", "Tanvika", "Reeva", "Rashi", "Bhoomi", "Akhila",
-  "Arohi", "Avantika", "Baani", "Chavi", "Diya", "Ela", "Falak", "Gul", "Hiral", "Inaaya",
-  "Jivika", "Kiya", "Liyana", "Mira", "Nyra", "Oorja", "Pari", "Qirat", "Riva", "Sitara",
-  "Tisha", "Urja", "Vanya", "Wamika", "Xara", "Yana", "Zaara", "Arhaan", "Bhuvan", "Chandan",
-  "Darpan", "Eklavya", "Farhan", "Gauransh", "Hriday", "Ibrahim", "Jaskaran", "Kiaan", "Lakshay", "Moksh",
-  "Naksh", "Onkar", "Pradyumna", "Qasim", "Ranveer", "Samarjeet", "Tarak", "Utkarsh", "Vedant", "Waris",
-  "Xavier", "Yatindra", "Zoravar", "Amey", "Bhargav", "Chirantan", "Devansh", "Eshan", "Fanish", "Govind"
-];
+  "Manav", "Neeraj", "Jatin", "Tushar", "Tejas", "Siddharth", "Aniket", "Mihir", "Raj", "Jay",
+  "Tarun", "Amit", "Parth", "Arnav", "Vishal", "Ajay", "Rahul", "Karan", "Abhishek", "Mayank",
+  "Anjali", "Priya", "Pooja", "Kavya", "Swati", "Neha", "Riya", "Shreya", "Sakshi", "Nikita",
+  "Ananya", "Ishita", "Tanya", "Khushi", "Sneha", "Radhika", "Divya", "Aishwarya", "Sanya", "Simran",
+  "Aarti", "Bhavya", "Megha", "Nandini", "Tanu", "Shruti", "Avni", "Jhanvi", "Pallavi", "Kritika",
+  "Aarohi", "Muskan", "Trisha", "Ayesha", "Shanaya", "Rekha", "Rashmi", "Payal", "Vandana", "Smita",
+  "Deepa", "Naina", "Radha", "Kiran", "Sonia", "Lata", "Geeta", "Madhuri", "Sushma", "Preeti",
+  "Akash", "Rajat", "Sahil", "Raman", "Sandeep", "Vikram", "Gaurav", "Dinesh", "Ritesh", "Sumit",
+  "Rohin", "Suraj", "Vivek", "Pranav", "Aman", "Anirudh", "Bhavesh", "Chirag", "Darshan", "Eshan",
+  "Firoz", "Girish", "Hitesh", "Ishwar", "Jitesh", "Ketan", "Lalit", "Manish", "Naveen", "Omkar",
+  "Parth", "Qasim", "Rishabh", "Sanjay", "Tarun", "Umesh", "Vasant", "Yogesh", "Zeeshan", "Zubin",
+  "Asha", "Bina", "Charu", "Disha", "Esha", "Falguni", "Gita", "Hema", "Ila", "Jaya",
+  "Kavita", "Laxmi", "Mala", "Neeta", "Ojaswini", "Priti", "Rani", "Seema", "Tina", "Usha",
+  "Vidya", "Yamini", "Zara", "Alka", "Bharti", "Chanda", "Devika", "Eshani", "Farah", "Gayatri",
+  "Harini", "Indira", "Juhi", "Kalpana", "Leela", "Mina", "Nisha", "Omi", "Parvati", "Radha",
+  "Sonal", "Tanvi", "Urmi", "Varsha", "Yashoda", "Zeenat",
+  "Arvind", "Bharat", "Chetan", "Dilip", "Eklavya", "Farhan", "Gagan", "Hari", "Ishan", "Jagdish",
+  "Kiran", "Lalit", "Mohan", "Nitin", "Ojas", "Prakash", "Rakesh", "Suresh", "Tej", "Uday",
+  "Vikas", "Yashwant", "Zuber", "Ashok", "Bhupesh", "Chandan", "Deepak", "Eshwar", "Firoz",
+  "Ganesh", "Hemant", "Irfan", "Jatin", "Kamal", "Laxman", "Manoj", "Nilesh", "Omprakash", "Pankaj",
+  "Rahul", "Sameer", "Tapan", "Umesh", "Vijay", "Yuvraj", "Zafar",
+  "Amrita", "Bhavika", "Chaitali", "Diksha", "Ekta", "Falguni", "Gauri", "Himani", "Indu", "Jahnavi",
+  "Kumari", "Lalita", "Madhavi", "Nalini", "Omi", "Pallavi", "Ritu", "Sarita", "Tanisha", "Urmila",
+  "Vasudha", "Yogita", "Zulekha",
+  "Abhinav", "Bhavesh", "Chirag", "Dhanush", "Eshaan", "Faizal", "Gautam", "Harish", "Ishaan", "Jaspreet",
+  "Karan", "Lakshay", "Manav", "Niranjan", "Om", "Pranav", "Raghav", "Siddhant", "Tushar", "Ujjwal",
+  "Vishal", "Yash", "Zain",
+  "Anika", "Brinda", "Charita", "Divya", "Eesha", "Farah", "Gitali", "Hina", "Isha", "Jaya",
+  "Kavya", "Lina", "Meera", "Naina", "Ojaswini", "Pooja", "Riya", "Sanya", "Tara", "Urvi",
+  "Vaishali", "Yamini", "Zoya"
+]
+
 
 let timer;
 let letters=0
