@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯Task-manager</title>
+</head>
+<style>
+    #input-task{
+        display: flex;
+        justify-content: space-around;
+        border: 1px solid black;
+        height: 40px;
+        background-color: beige;
+        box-shadow: 2px 2px 2px 2px rgb(66, 101, 101);
+        padding: 10px;
+
+
+    }
+
+    #add-task{
+        width: 80px;
+        height: 30px;
+        border-radius: 10px;
+        border: none;
+        background-color: aquamarine;
+
+    }
+
+    #list{
+        width: 100%;
+        margin-top: 30px;
+        
+    }
+
+    .done,.undone{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+
+    }
+
+    .done{
+        background-color: lightgreen;
+    }
+</style>
+<body>
+     <div id="input-task">
+        <input type="text" name="" id="task-name" placeholder="Enter task name">
+        <button id="add-task">Add task</button>
+     </div>
+
+     <div id="list"></div>
+</body>
+</html>
+
+
+<script>
+    const baseURL="https://task-manager-4411d-default-rtdb.firebaseio.com/tasks.json"
+
+    //ceate
+     
+    document.getElementById('add-task').addEventListener("click",()=>{
+        let task_name=document.getElementById('task-name').value
+
+        let task={
+            "name":task_name,
+            "status":false
+        }
+
+
+        fetch(baseURL,{
+            method:'POST',
+            body:JSON.stringify(task),
+            headers:{'Content-Type':'application/json'}
+        })
+        .then(res=>res.json())
+        .then(()=>fetchTask())
+
+    })
+
+
+    function fetchTask(){
+         let list=document.getElementById("list")
+        list.innerHTML=""
+        
+
+        fetch(baseURL)
+        .then(res=>res.json())
+        .then(data=>{
+           
+             if(data){
+            Object.keys(data).forEach(key=>{
+                let task=data[key]
+
+                let div =document.createElement('div')
+                // div.className="card"
+
+                div.innerHTML=`
+               <i>${task.name}</i> 
+               <b>${task.status ?"complated":"pending"}</b> 
+               <button onclick="deletetask('${key}')">Delete</button>
+               <button onclick="complate('${key}', ${task.status})">Complete</button>
+                `
+                list.innerHTML="<hr>"
+               list.appendChild(div)
+
+               if(task.status){
+                div.className="done"
+               }
+               else{
+                div.className="undone"
+               }
+            })
+     
+        
+    }
+        else{
+            list.innerHTML="No Data Add some Task"
+        }
+       })
+       
+    }
+
+
+
+
+   function complate(id,status){
+     let statuscheck={"status":!status}
+
+     fetch(`https://task-manager-4411d-default-rtdb.firebaseio.com/tasks/${id}.json`,{
+        method:'PATCH',
+        body:JSON.stringify(statuscheck),
+         headers:{'Content-Type':'application/json'}
+           
+     })
+
+      .then(() => fetchTask());
+   }
+
+
+  function deletetask (id){ 
+         fetch(`https://task-manager-4411d-default-rtdb.firebaseio.com/tasks/${id}.json`,{
+            method:"DELETE"
+         })
+          .then(() => fetchTask());
+  }
+
+  fetchTask()
+</script>
