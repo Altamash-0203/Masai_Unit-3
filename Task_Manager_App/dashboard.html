@@ -38,6 +38,10 @@
         justify-content: space-between;
         align-items: center;
         text-align: center;
+        border: 1px solid black;
+        padding: 10px;
+        gap: 10px;
+        margin-top: 10px;
 
     }
 
@@ -88,11 +92,13 @@
 
         fetch(baseURL)
         .then(res=>res.json())
-        .then(data=>{
-           
-             if(data){
-            Object.keys(data).forEach(key=>{
-                let task=data[key]
+        .then(collection=>{
+            
+             if(collection && Object.keys(collection).length>0)
+             {
+
+            Object.keys(collection).forEach(key=>{
+                let task=collection[key]
 
                 let div =document.createElement('div')
                 // div.className="card"
@@ -101,9 +107,9 @@
                <i>${task.name}</i> 
                <b>${task.status ?"complated":"pending"}</b> 
                <button onclick="deletetask('${key}')">Delete</button>
-               <button onclick="complate('${key}', ${task.status})">Complete</button>
-                `
-                list.innerHTML="<hr>"
+               <button onclick="complate('${key}', ${task.status})">Complete</button> 
+               `
+
                list.appendChild(div)
 
                if(task.status){
