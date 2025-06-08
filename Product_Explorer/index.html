@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="nav">
+         <h2 style="font-family:  Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font: 1em sans-serif;"><span style="font-weight: 900; color: aqua; font-size: x-large;">@</span>PNACART🛒</h2>
+
+         <input type="text" id="search-item" placeholder="Enter Product Name">
+         
+    </div>
+
+    <div id="filters">
+        <!-- sort -->
+        <div>
+         <select name="" id="sorting">
+            <option value="ltoh">Low-To-High</option>
+            <option value="htol">High-To-Low</option>
+            <option value="atoz">A to Z </option>
+            <option value="ztoa">Z to A</option>
+         </select>
+         <button onclick="sortProducts()">Apply</button> 
+        </div>
+<!-- filter -->
+ <div>
+            <select name="" id="filtering">
+            <option value="men's clothing">mens</option>
+            <option value="electronics">Electronics</option>
+            <option value="jewelery">Jewelery</option>
+            <option value="women's clothing">Women</option>
+         </select>
+          <button onclick="filterProducts()">Apply</button> 
+
+    </div>
+    </div>
+    <hr>
+    <!-- List  -->
+    <div id="list">
+
+    </div>
+
+    <div id="pagination">
+        <button class="page-btn" onclick="nextPage(-1)">Prev</button>
+        <button class="page-btn" onclick="nextPage(+1)">next</button>
+    </div>
+</body>
+</html>
+
+
+<script>
+    let num=1
+
+    
+    async function FetchProducts(sort,filter){
+     let url="https://fakestoreapi.com/products"
+
+     if(filter){
+        url+=`/category/${filter}`
+     }
+
+     let res=await fetch(url)
+     let data=await res.json()
+
+
+     if(sort){
+        if(sort=="ltoh"){
+            data.sort((a,b)=>a.price-b.price)
+        }
+
+        else if(sort=="htol"){
+            data.sort((a,b)=>b.price-a.price)
+        }
+
+        else if(sort=="atoz"){
+             data=data.sort((a,b)=>a.title.localeCompare(b.title))
+
+        }
+
+        else if("ztoa"){
+             data=data.sort((a,b)=>b.title.localeCompare(a.title))
+        }
+     }
+         
+     let item=data.slice((num-1)*8,num*8)
+     let list=document.getElementById('list')
+     list.innerHTML=""
+       
+     item.forEach(product => {
+        
+
+     let div=document.createElement('div')
+    
+     div.className="card"
+
+     div.innerHTML=`
+         <img src="${product.image}" alt="${product.title}"> <br> 
+         <p>${product.title}</p> <br><br>
+         <b><p>Price:</p>${product.price}</b> <br>
+         <i><b>category:</b>${product.category}</i>
+     `
+     list.appendChild(div)
+          });
+
+
+}
+
+
+function nextPage(id)
+{
+    num+=id
+    if(num<1)
+        num=1
+    FetchProducts()
+}
+
+
+function sortProducts(){
+    let sort=document.getElementById("sorting").value
+    FetchProducts(sort)
+}
+
+function filterProducts(){
+      let filtering=document.getElementById("filtering").value
+
+      FetchProducts('',filtering)
+}
+
+FetchProducts()
+
+
+
+
+
+
+
+
+//serching
+let timer;
+document.getElementById("search-item").addEventListener("input",()=>{
+
+    clearTimeout(timer)
+
+    timer= setTimeout(() => {
+
+        let query=document.getElementById("search-item").value.toLowerCase()
+        fetch("https://fakestoreapi.com/products")
+        .then(res=>res.json())
+        .then(data=>{
+
+      let search_item=data.filter((a)=>a.title.toLowerCase().includes(query))
+                
+     let item=search_item.slice((num-1)*8,num*8)
+     let list=document.getElementById('list')
+     list.innerHTML=""
+       
+     item.forEach(product => {
+        
+
+     let div=document.createElement('div')
+    
+     div.className="card"
+
+     div.innerHTML=`
+         <img src="${product.image}" alt="${product.title}"> <br> 
+         <p>${product.title}</p> <br><br>
+         <b><p>Price:</p>${product.price}</b> <br>
+         <i><b>category:</b>${product.category}</i>
+     `
+     list.appendChild(div)
+          });
+
+        })
+    }, 1000);
+    
+})
+</script>

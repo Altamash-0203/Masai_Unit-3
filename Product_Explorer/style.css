@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: gainsboro;
+}
+
+#nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px;
+    background-color: cadetblue;
+    height: 70px;
+}
+
+#search-item{
+    height: 30px;
+    padding: 10px;
+    margin-right: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: none;
+
+}
+
+#nav h2,span{
+    background-color: transparent;
+    color: whitesmoke;
+    font-size: xx-large;
+}
+
+
+
+#filters{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+}
+
+#filters select,button{
+    width: 150px;
+    text-align: center;
+    border-radius: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: azure;
+
+
+}
+
+#filters button{
+    width: 70px;
+    border: none;
+     background-color: rgb(74, 121, 202);
+    font-size: 15px;
+    color: white;
+
+
+}
+
+
+
+#list{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    text-align: center;
+}
+
+.card img{
+    width: 150px;
+    height: 150px;
+    border-radius: 10px
+}
+
+.card{
+    border: 1px solid rgb(55, 197, 240);
+    background-color: azure;
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    display: grid;
+    justify-content: center;
+    border-radius: 10px;
+   
+}
+
+.card:hover{
+     box-shadow: 3px 3px 3px 3px rgb(114, 114, 114);
+}
+
+
+
+#pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+    height: 50px;
+
+}
+.page-btn{
+    width: 100px;
+    padding: 5px;
+    border: none;
+    background-color: rgb(72, 72, 208);
+    border-radius: 10px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+#page-num{
+    text-align: center;
+    
+}
