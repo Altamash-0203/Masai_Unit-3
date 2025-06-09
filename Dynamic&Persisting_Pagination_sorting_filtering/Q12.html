@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .img{
+        width: 200px;
+        height: 300px;
+        border-radius: 55px;
+        padding: 20px;
+        margin-left: 30%;
+
+    }
+    .card{
+        border: 1px solid black;
+        border-radius: 20px;
+          justify-content: center;
+        align-items: center;
+    }
+
+    .card:hover{
+        box-shadow: 10px 1px 5px 5px rgb(32, 32, 32);
+    }
+    
+    #list{
+        display: grid;
+        grid-template-columns: repeat(3,2fr);
+        gap: 20px;
+      
+   
+        
+    }
+
+</style>
+<body>
+    <div id="list">
+
+    </div>
+    <h3 id="load">Loading</h3>
+</body>
+</html>
+
+
+<script>
+    let page=1
+    let list=document.getElementById('list')
+    let load=document.getElementById('load')
+    let check=true
+
+    function fetchImg(page){
+    fetch(`https://picsum.photos/v2/list?page=${page}&limit=10`)
+    .then(res=>res.json())
+    .then(data=>{
+        data.forEach(img => {
+            let div=document.createElement('div')
+            div.className="card"
+            div.innerHTML=`
+            <img class="img" src=${img.download_url}>
+            `
+            list.appendChild(div)
+        });
+        check=false
+        load.style.display='none'
+    })
+}
+
+function scroll(){
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-1000){
+
+        if(!check){
+            check=true
+            load.style.display="block"
+            page++
+            fetchImg(page)
+        }
+    }
+}
+
+window.onload=()=>{
+    fetchImg(page)
+    window.addEventListener('scroll',scroll)
+}
+
+fetchImg()
+</script>
