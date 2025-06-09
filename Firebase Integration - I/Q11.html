@@ -1,4 +1,4 @@
-Q: 11
+<!-- Q: 11
 Title:
 L0 - Introduction to Firebase Realtime Database
 
@@ -16,4 +16,61 @@ Your task is to:
 
 Fetch the data from the Firebase Realtime Database using the GET method.
 Display the list of users in a tabular format with columns: "Name" and "Email."
-Handle any errors during the fetch operation and display an appropriate message on the page.
+Handle any errors during the fetch operation and display an appropriate message on the page. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #list,#nav{
+
+    width: 100%;
+  }
+
+  .line,#nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    border: 1px solid cyan;
+    width:500px;
+    margin-left: 20%;
+
+  }
+</style>
+<body>
+  <div id="nav" style="display: flex; justify-content: space-evenly; border: 2px solid gray;" >
+    <b>Name</b>
+    <b>Email</b>
+  </div>
+    <div id="list">
+      
+    </div>
+</body>
+</html>
+
+<script>
+  let list=document.getElementById('list')
+  list.innerHTML=""
+
+  fetch("https://users-data-56eaf-default-rtdb.firebaseio.com/users.json")
+  .then(res=>res.json())
+  .then(data=>{
+    let filtered=Object.entries(data)
+
+    filtered.forEach(([id, deatails]) => {
+         let div=document.createElement('div')
+         div.className="line"
+         div.innerHTML=`
+         <b>${deatails.name}</b> 
+         <p>${deatails.email}</b>
+          `
+          list.appendChild(div)
+    });
+  })
+</script>
