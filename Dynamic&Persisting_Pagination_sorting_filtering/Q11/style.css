@@ -1,0 +1,38 @@
+#filtters{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: aquamarine;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#filter{
+    background-color: transparent;
+    font-size: larger;
+    border: 2px solid rgb(141, 132, 110);
+    color: rebeccapurple;
+    border-radius: 20px;
+
+}
+
+#list{
+    background-color: aquamarine;
+    display: grid;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    text-align: center;
+    margin-left: 150px;
+}
+.value{
+    border: 1px solid blanchedalmond;
+    box-shadow: 5px 5px 5px gray;
+    
+    
+}
+.value:hover{
+    background-color: cornflowerblue;
+    
+}
